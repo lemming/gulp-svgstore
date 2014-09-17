@@ -1,8 +1,6 @@
 gulp-svgstore
 =============
 
-[![Build Status](https://api.travis-ci.org/w0rm/gulp-svgstore.png)](https://travis-ci.org/w0rm/gulp-svgstore)
-
 Combine svg files into one with `<symbol>` elements.
 Read more about this in [CSS Tricks article](http://css-tricks.com/svg-symbol-good-choice-icons/).
 
@@ -84,9 +82,8 @@ To remove all fill attributes (so you can set fill from css) use the following t
 
 ```js
 function transformSvg (svg, cb) {
-  svg.find('//*[@fill]').forEach(function (child) {
-    child.attr('fill').remove()
-  })
+  svg.find('[fill]').forEach(function (child) {
+    child.attr('fill').removeAttr('fill')
   cb(null)
 }
 ```
@@ -95,9 +92,7 @@ Remove only particular fills (e.g. fill="none"):
 
 ```js
 function transformSvg (svg, cb) {
-  svg.find('//*[@fill="none"]').forEach(function (child) {
-    child.attr('fill').remove()
-  })
+  svg.find('[fill="none"]').removeAttr('fill')
   cb(null)
 }
 ```
