@@ -27,7 +27,7 @@ module.exports = function (config) {
             var idAttr = prefix + path.basename(file.relative, path.extname(file.relative));
 
             var $xmlDoc = cheerio.load(file.contents.toString('utf8'), {xmlMode: true});
-            var viewBoxAttr = $xmlDoc('svg').attr('viewBox');
+            var viewBoxAttr = $xmlDoc('svg').attr('viewBox') || '';
 
             var symbol = cheerio('<symbol></symbol>');
             symbol.attr({id: idAttr, viewBox: viewBoxAttr});
