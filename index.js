@@ -29,10 +29,11 @@ module.exports = function (config) {
             var $xmlDoc = cheerio.load(file.contents.toString('utf8'), {xmlMode: true});
             var viewBoxAttr = $xmlDoc('svg').attr('viewBox') || '';
 
-            var symbol = cheerio('<symbol></symbol>');
+            var symbolDoc = cheerio.load('<symbol></symbol>', {xmlMode: true});
+			var symbol = symbolDoc('symbol');
             symbol.attr({id: idAttr, viewBox: viewBoxAttr});
 
-            symbol.html($xmlDoc('svg').html());
+            symbol.append($xmlDoc('svg').html());
             combinedSvg.append(symbol);
 
             cb(null);
